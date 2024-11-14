@@ -50,10 +50,65 @@
             max-width: 300px;
             margin: 0 auto;
         }
+		input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    background: #000; /* Black background */
+    border: none;
+    border-radius: 2.5px;
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #000; /* Black thumb */
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #fff; /* White border around black thumb */
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #000; /* Black thumb for Firefox */
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+input[type="range"]::-moz-range-track {
+    background: #000; /* Black track for Firefox */
+}
+
+input[type="range"]::-ms-thumb {
+    width: 20px;
+    height: 20px;
+    background: #000; /* Black thumb for IE/Edge */
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+input[type="range"]::-ms-fill-lower {
+    background: #000; /* Black lower part for IE/Edge */
+}
+
+input[type="range"]::-ms-fill-upper {
+    background: #000; /* Black upper part for IE/Edge */
+}
+
     </style>
 </head>
 <body>
     <div class="container">
+    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1" />
+        <span id="volumeDisplay">Volume: 1</span>
+    </div>
         <div class="header">
             <h1>Compare Three Versions of Kings And Pawns</h1>
         </div>
@@ -85,7 +140,16 @@
         let isPlaying = false;
         let currentVersion = 1;
 
-        function initializeAudio() {
+        function updateVolume() {
+    const slider = document.getElementById('volumeSlider');
+    const display = document.getElementById('volumeDisplay');
+    audioElements.forEach(audio => {
+        audio.volume = parseFloat(slider.value);
+    });
+    display.textContent = `Volume: ${slider.value}`;
+}
+
+function initializeAudio() {
             audioElements = [
                 document.getElementById('audio1'),
                 document.getElementById('audio2'),
@@ -114,6 +178,18 @@
             // Play first version by default
             playVersion(1);
 
+
+    // Add event listener for volume slider
+    const volumeSlider = document.getElementById('volumeSlider');
+    volumeSlider.addEventListener('input', updateVolume);
+
+    // Set initial volume
+    audioElements.forEach(audio => {
+        audio.muted = true;
+        audio.volume = 1;
+    });
+	
+	
             // Highlight active button
             document.getElementById(`version${currentVersion}Button`).classList.add('active');
         }
@@ -132,24 +208,26 @@
             isPlaying = false;
         }
 
-        function toggleVersion(version) {
-            currentVersion = version;
-            
-            // Adjust volume levels
-            audioElements.forEach(audio => {
-                audio.muted = true;
-                audio.volume = 0;
-            });
-            audioElements[version - 1].muted = false;
-            audioElements[version - 1].volume = 1;
+function toggleVersion(version) {
+    currentVersion = version;
+    
+    // Adjust volume levels
+    audioElements.forEach(audio => {
+        audio.muted = true;
+        audio.volume = 1; // Reset all volumes to full before adjusting
+    });
+    audioElements[version - 1].muted = false;
+    
+    // Update volume based on slider position
+    updateVolume();
 
-            // Highlight active button
-            document.getElementById(`version${currentVersion}Button`).classList.add('active');
-            document.getElementById(`version${currentVersion-1}Button`).classList.remove('active');
+    // Highlight active button
+    document.getElementById(`version${currentVersion}Button`).classList.add('active');
+    document.getElementById(`version${currentVersion-1}Button`).classList.remove('active');
 
-            // Keep the button text unchanged
-            document.getElementById(`version${currentVersion}Button`).textContent = `Listen to ${getVersionText(currentVersion)}`;
-        }
+    // Keep the button text unchanged
+    document.getElementById(`version${currentVersion}Button`).textContent = `Listen to ${getVersionText(currentVersion)}`;
+}
 
         function getVersionText(version) {
             switch(version) {
