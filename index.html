@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP3 Version Comparison</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        audio {
+            width: 100%;
+            height: auto;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Compare Three Versions of Kings And Pawns</h1>
+        </div>
+<div class="button-group">
+    <div>
+        <button onclick="toggleVersion(1)" id="version1Button">Listen to 5150 Version</button>
+        <button onclick="toggleVersion(2)" id="version2Button">Listen to Kranked Version</button>
+        <button onclick="toggleVersion(3)" id="version3Button">Listen to TGE Version</button>
+    </div>
+    <button onclick="playAll()">Play All</button>
+    <button onclick="stopPlayback()">Stop Playback</button>
+</div>
+
+        <div style="display: flex; justify-content: center;">
+<!--            <audio id="audio1" src="D:\MusicProduction\EarlyDemise\KingsAndPawns\Mix49\Mixdown\KingsAndPawns_49a15.mp3"></audio>
+            <audio id="audio2" src="D:\MusicProduction\EarlyDemise\KingsAndPawns\Mix49\Mixdown\KingsAndPawns_49a15krank.mp3"></audio>
+            <audio id="audio3" src="D:\MusicProduction\EarlyDemise\KingsAndPawns\Mix49\Mixdown\KingsAndPawns_49a15krank02.mp3"></audio>-->
+            <audio id="audio1" src="KingsAndPawns_49a15.mp3"></audio>
+			<audio id="audio2" src="KingsAndPawns_49a15krank02.mp3"></audio>
+            <audio id="audio3" src="KingsAndPawns_49a15_TGEtest06.mp3"></audio>            
+        </div>
+    </div>
+
+    <script>
+        let audioElements = [];
+        let isPlaying = false;
+        let currentVersion = 1;
+
+        function initializeAudio() {
+            audioElements = [
+                document.getElementById('audio1'),
+                document.getElementById('audio2'),
+                document.getElementById('audio3')
+            ];
+            
+            // Initialize buttons with correct text
+            document.getElementById('version1Button').textContent = 'Listen to 5150 Version';
+            document.getElementById('version2Button').textContent = 'Listen to Kranked Version';
+            document.getElementById('version3Button').textContent = 'Listen to TGE Version';
+
+            // Set initial state
+            audioElements.forEach(audio => audio.volume = 0);
+            audioElements[0].volume = 1;
+
+            // Play first version by default
+            playVersion(1);
+        }
+
+        function playAll() {
+            if (!isPlaying) {
+                audioElements.forEach(audio => audio.play());
+                isPlaying = true;
+            } else {
+                alert("All versions are already playing.");
+            }
+        }
+
+        function stopPlayback() {
+            audioElements.forEach(audio => audio.pause());
+            isPlaying = false;
+        }
+
+ 
+ function toggleVersion(version) {
+    currentVersion = version;
+    
+    // Adjust volume levels
+    audioElements.forEach(audio => audio.volume = 0);
+    audioElements[version - 1].volume = 1;
+
+    // Keep the button text unchanged
+    document.getElementById(`version${currentVersion}Button`).textContent = `Listen to ${getVersionText(currentVersion)}`;
+}
+
+function getVersionText(version) {
+    switch(version) {
+        case 1:
+            return '5150 Version';
+        case 2:
+            return 'Kranked Version';
+        case 3:
+            return 'TGE Version';
+        default:
+            return '';
+    }
+}
+
+function playVersion(version) {
+    if (!isPlaying) {
+        audioElements[version - 1].play();
+        audioElements.forEach(audio => audio.currentTime = 0);
+    }
+}
+
+
+        window.onload = initializeAudio;
+    </script>
+	
+	Version 1 is 5150
+	
+	Version 2 is Kranked
+	
+	Version 3 is TGE
+</body>
+</html>
