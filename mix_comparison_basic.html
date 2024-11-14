@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP3 Version Comparison</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        button {
+            margin-right: 10px;
+        }
+        audio {
+            width: 100%;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Compare Three Versions of Kings And Pawns</h1>
+
+    <button onclick="playAll()">Play All</button>
+    <button onclick="stopPlayback()">Stop Playback</button>
+
+    <div style="display: flex; justify-content: space-between;">
+        <div>
+            <button onclick="toggleVersion(1)" id="version1Button">Listen to Version 1</button>
+            <button onclick="toggleVersion(2)" id="version2Button">Listen to Version 2</button>
+            <button onclick="toggleVersion(3)" id="version3Button">Listen to Version 3</button>
+        </div>
+        <div>
+<!--            <audio id="audio1" src="D:\MusicProduction\EarlyDemise\KingsAndPawns\Mix49\Mixdown\KingsAndPawns_49a15.mp3"></audio>
+            <audio id="audio2" src="D:\MusicProduction\EarlyDemise\KingsAndPawns\Mix49\Mixdown\KingsAndPawns_49a15krank.mp3"></audio>
+            <audio id="audio3" src="D:\MusicProduction\EarlyDemise\KingsAndPawns\Mix49\Mixdown\KingsAndPawns_49a15krank02.mp3"></audio>-->
+            <audio id="audio1" src="D:\MusicProduction\EarlyDemise\KingsAndPawns\Mix49\Mixdown\KingsAndPawns_49a15.mp3"></audio>
+            <audio id="audio2" src="D:\MusicProduction\EarlyDemise\KingsAndPawns\TGE_test\Mixdown\KingsAndPawns_49a15_TGEtest03.mp3"></audio>
+            <audio id="audio3" src="D:\MusicProduction\EarlyDemise\KingsAndPawns\TGE_test\Mixdown\KingsAndPawns_49a15_TGEtest01.mp3"></audio>
+        </div>
+    </div>
+
+    <script>
+        let audioElements = [];
+        let isPlaying = false;
+        let currentVersion = 1;
+
+        function initializeAudio() {
+            audioElements = [
+                document.getElementById('audio1'),
+                document.getElementById('audio2'),
+                document.getElementById('audio3')
+            ];
+            
+            // Initialize buttons with correct text
+            document.getElementById('version1Button').textContent = 'Listen to Version 1';
+            document.getElementById('version2Button').textContent = 'Listen to Version 2';
+            document.getElementById('version3Button').textContent = 'Listen to Version 3';
+
+            // Set initial state
+            audioElements.forEach(audio => audio.volume = 0);
+            audioElements[0].volume = 1;
+
+            // Play first version by default
+            playVersion(1);
+        }
+
+        function playAll() {
+            if (!isPlaying) {
+                audioElements.forEach(audio => audio.play());
+                isPlaying = true;
+            } else {
+                alert("All versions are already playing.");
+            }
+        }
+
+        function stopPlayback() {
+            audioElements.forEach(audio => audio.pause());
+            isPlaying = false;
+        }
+
+        function toggleVersion(version) {
+            currentVersion = version;
+            
+            // Adjust volume levels
+            audioElements.forEach(audio => audio.volume = 0);
+            audioElements[version - 1].volume = 1;
+
+            // Update button text
+            document.getElementById(`version${currentVersion}Button`).textContent = `Listen to Version ${currentVersion}`;
+        }
+
+        function playVersion(version) {
+            if (!isPlaying) {
+                audioElements[version - 1].play();
+                audioElements.forEach(audio => audio.currentTime = 0);
+            }
+        }
+
+        window.onload = initializeAudio;
+    </script>
+</body>
+</html>
