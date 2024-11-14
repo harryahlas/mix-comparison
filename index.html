@@ -100,6 +100,22 @@ input[type="range"]::-ms-fill-lower {
 input[type="range"]::-ms-fill-upper {
     background: #000; /* Black upper part for IE/Edge */
 }
+button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+button.active {
+    background-color: #555;
+}
 
     </style>
 </head>
@@ -134,6 +150,12 @@ input[type="range"]::-ms-fill-upper {
             <audio id="audio6" src="finalproduct.mp3"></audio>			
         </div>
     </div>
+<div style="display: flex; justify-content: center; margin-top: 20px;">
+    <button onclick="rewind30()" id="rewind30">Rewind 30s</button>
+    <button onclick="rewind10()" id="rewind10">Rewind 10s</button>
+    <button onclick="fastForward10()" id="fastForward10">Fast Forward 10s</button>
+    <button onclick="fastForward30()" id="fastForward30">Fast Forward 30s</button>
+</div>
 
     <script>
         let audioElements = [];
@@ -256,6 +278,37 @@ function toggleVersion(version) {
         }
 
         window.onload = initializeAudio;
-    </script>
+    function rewind30() {
+    audioElements.forEach(audio => {
+        if (audio.currentTime > 0) {
+            audio.currentTime -= 30;
+        }
+    });
+}
+
+function rewind10() {
+    audioElements.forEach(audio => {
+        if (audio.currentTime > 0) {
+            audio.currentTime -= 10;
+        }
+    });
+}
+
+function fastForward10() {
+    audioElements.forEach(audio => {
+        if (audio.currentTime < audio.duration) {
+            audio.currentTime += 10;
+        }
+    });
+}
+
+function fastForward30() {
+    audioElements.forEach(audio => {
+        if (audio.currentTime < audio.duration) {
+            audio.currentTime += 30;
+        }
+    });
+}
+</script>
 </body>
 </html>
