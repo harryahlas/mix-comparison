@@ -41,6 +41,9 @@
         button:hover {
             background-color: #555;
         }
+        button.active {
+            background-color: #555;
+        }
         audio {
             width: 100%;
             height: auto;
@@ -54,29 +57,26 @@
         <div class="header">
             <h1>Compare Three Versions of Kings And Pawns</h1>
         </div>
-<div class="button-group">
-    <div>
-        <button onclick="toggleVersion(1)" id="version1Button">Listen to 5150 Version</button>
-        <button onclick="toggleVersion(2)" id="version2Button">Listen to Kranked Version</button>
-        <button onclick="toggleVersion(3)" id="version3Button">Listen to TGE Version</button>
-        <button onclick="toggleVersion(4)" id="version3Button">Listen to algorithmic_salvation.mp3</button>		
-        <button onclick="toggleVersion(5)" id="version3Button">Listen to everythingihateaboutyou.mp3</button>
-        <button onclick="toggleVersion(6)" id="version3Button">Listen to finalproduct.mp3</button>
-	</div>
-    <button onclick="playAll()">Play All</button>
-    <button onclick="stopPlayback()">Stop Playback</button>
-</div>
+        <div class="button-group">
+            <div>
+                <button onclick="toggleVersion(1)" id="version1Button">Listen to 5150 Version</button>
+                <button onclick="toggleVersion(2)" id="version2Button">Listen to Kranked Version</button>
+                <button onclick="toggleVersion(3)" id="version3Button">Listen to TGE Version</button>
+                <button onclick="toggleVersion(4)" id="version4Button">Listen to algorithmic_salvation.mp3</button>		
+                <button onclick="toggleVersion(5)" id="version5Button">Listen to everythingihateaboutyou.mp3</button>
+                <button onclick="toggleVersion(6)" id="version6Button">Listen to finalproduct.mp3</button>
+            </div>
+            <button onclick="playAll()">Play All</button>
+            <button onclick="stopPlayback()">Stop Playback</button>
+        </div>
 
         <div style="display: flex; justify-content: center;">
-<!--            <audio id="audio1" src="D:\MusicProduction\EarlyDemise\KingsAndPawns\Mix49\Mixdown\KingsAndPawns_49a15.mp3"></audio>
-            <audio id="audio2" src="D:\MusicProduction\EarlyDemise\KingsAndPawns\Mix49\Mixdown\KingsAndPawns_49a15krank.mp3"></audio>
-            <audio id="audio3" src="D:\MusicProduction\EarlyDemise\KingsAndPawns\Mix49\Mixdown\KingsAndPawns_49a15krank02.mp3"></audio>-->
             <audio id="audio1" src="KingsAndPawns_49a15.mp3"></audio>
-			<audio id="audio2" src="KingsAndPawns_49a15krank02.mp3"></audio>
+            <audio id="audio2" src="KingsAndPawns_49a15krank02.mp3"></audio>
             <audio id="audio3" src="KingsAndPawns_49a15_TGEtest06.mp3"></audio>    
             <audio id="audio4" src="algorithmic_salvation.mp3"></audio> 
             <audio id="audio5" src="everythingihateaboutyou.mp3"></audio> 
-            <audio id="audio6" src="finalproduct.mp3"></audio> 			
+            <audio id="audio6" src="finalproduct.mp3"></audio>			
         </div>
     </div>
 
@@ -104,11 +104,18 @@
 			document.getElementById('version6Button').textContent = 'Listen to finalproduct.mp3';
 
             // Set initial state
-            audioElements.forEach(audio => audio.volume = 0);
+            audioElements.forEach(audio => {
+                audio.muted = true;
+                audio.volume = 0;
+            });
+            audioElements[0].muted = false;
             audioElements[0].volume = 1;
 
             // Play first version by default
             playVersion(1);
+
+            // Highlight active button
+            document.getElementById(`version${currentVersion}Button`).classList.add('active');
         }
 
         function playAll() {
@@ -125,48 +132,52 @@
             isPlaying = false;
         }
 
- 
- function toggleVersion(version) {
-    currentVersion = version;
-    
-    // Adjust volume levels
-    audioElements.forEach(audio => audio.volume = 0);
-    audioElements[version - 1].volume = 1;
+        function toggleVersion(version) {
+            currentVersion = version;
+            
+            // Adjust volume levels
+            audioElements.forEach(audio => {
+                audio.muted = true;
+                audio.volume = 0;
+            });
+            audioElements[version - 1].muted = false;
+            audioElements[version - 1].volume = 1;
 
-    // Keep the button text unchanged
-    document.getElementById(`version${currentVersion}Button`).textContent = `Listen to ${getVersionText(currentVersion)}`;
-}
+            // Highlight active button
+            document.getElementById(`version${currentVersion}Button`).classList.add('active');
+            document.getElementById(`version${currentVersion-1}Button`).classList.remove('active');
 
-function getVersionText(version) {
-    switch(version) {
-        case 1:
-            return '5150 Version';
-        case 2:
-            return 'Kranked Version';
-        case 3:
-            return 'TGE Version';
-        case 4:
-            return 'algorithmic_salvation.mp3';
-        case 5:
-            return 'everythingihateaboutyou.mp3';
-        case 6:
-            return 'finalproduct.mp3';
-		default:
-            return '';
-    }
-}
+            // Keep the button text unchanged
+            document.getElementById(`version${currentVersion}Button`).textContent = `Listen to ${getVersionText(currentVersion)}`;
+        }
 
-function playVersion(version) {
-    if (!isPlaying) {
-        audioElements[version - 1].play();
-        audioElements.forEach(audio => audio.currentTime = 0);
-    }
-}
+        function getVersionText(version) {
+            switch(version) {
+                case 1:
+                    return '5150 Version';
+                case 2:
+                    return 'Kranked Version';
+                case 3:
+                    return 'TGE Version';
+                case 4:
+                    return 'algorithmic_salvation.mp3';
+                case 5:
+                    return 'everythingihateaboutyou.mp3';
+                case 6:
+                    return 'finalproduct.mp3';
+                default:
+                    return '';
+            }
+        }
 
+        function playVersion(version) {
+            if (!isPlaying) {
+                audioElements[version - 1].play();
+                audioElements.forEach(audio => audio.currentTime = 0);
+            }
+        }
 
         window.onload = initializeAudio;
     </script>
-	
-
 </body>
 </html>
