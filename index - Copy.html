@@ -59,10 +59,7 @@
         <button onclick="toggleVersion(1)" id="version1Button">Listen to 5150 Version</button>
         <button onclick="toggleVersion(2)" id="version2Button">Listen to Kranked Version</button>
         <button onclick="toggleVersion(3)" id="version3Button">Listen to TGE Version</button>
-        <button onclick="toggleVersion(4)" id="version3Button">Listen to algorithmic_salvation.mp3</button>		
-        <button onclick="toggleVersion(5)" id="version3Button">Listen to everythingihateaboutyou.mp3</button>
-        <button onclick="toggleVersion(6)" id="version3Button">Listen to finalproduct.mp3</button>
-	</div>
+    </div>
     <button onclick="playAll()">Play All</button>
     <button onclick="stopPlayback()">Stop Playback</button>
 </div>
@@ -73,10 +70,7 @@
             <audio id="audio3" src="D:\MusicProduction\EarlyDemise\KingsAndPawns\Mix49\Mixdown\KingsAndPawns_49a15krank02.mp3"></audio>-->
             <audio id="audio1" src="KingsAndPawns_49a15.mp3"></audio>
 			<audio id="audio2" src="KingsAndPawns_49a15krank02.mp3"></audio>
-            <audio id="audio3" src="KingsAndPawns_49a15_TGEtest06.mp3"></audio>    
-            <audio id="audio4" src="algorithmic_salvation.mp3"></audio> 
-            <audio id="audio5" src="everythingihateaboutyou.mp3"></audio> 
-            <audio id="audio6" src="finalproduct.mp3"></audio> 			
+            <audio id="audio3" src="KingsAndPawns_49a15_TGEtest06.mp3"></audio>            
         </div>
     </div>
 
@@ -89,19 +83,13 @@
             audioElements = [
                 document.getElementById('audio1'),
                 document.getElementById('audio2'),
-                document.getElementById('audio3'),
-                document.getElementById('audio4'),
-                document.getElementById('audio5'),				
-                document.getElementById('audio6')
+                document.getElementById('audio3')
             ];
             
             // Initialize buttons with correct text
             document.getElementById('version1Button').textContent = 'Listen to 5150 Version';
             document.getElementById('version2Button').textContent = 'Listen to Kranked Version';
             document.getElementById('version3Button').textContent = 'Listen to TGE Version';
-            document.getElementById('version4Button').textContent = 'Listen to algorithmic_salvation.mp3';
-			document.getElementById('version5Button').textContent = 'Listen to everythingihateaboutyou.mp3';
-			document.getElementById('version6Button').textContent = 'Listen to finalproduct.mp3';
 
             // Set initial state
             audioElements.forEach(audio => audio.volume = 0);
@@ -145,13 +133,7 @@ function getVersionText(version) {
             return 'Kranked Version';
         case 3:
             return 'TGE Version';
-        case 4:
-            return 'algorithmic_salvation.mp3';
-        case 5:
-            return 'everythingihateaboutyou.mp3';
-        case 6:
-            return 'finalproduct.mp3';
-		default:
+        default:
             return '';
     }
 }
@@ -167,6 +149,10 @@ function playVersion(version) {
         window.onload = initializeAudio;
     </script>
 	
-
+	Version 1 is 5150
+	
+	Version 2 is Kranked
+	
+	Version 3 is TGE
 </body>
 </html>
