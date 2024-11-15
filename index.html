@@ -121,12 +121,9 @@ button.active {
 </head>
 <body>
     <div class="container">
-    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-        <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1" />
-        <span id="volumeDisplay">Volume: 1</span>
-    </div>
-        <div class="header">
-            <h1>Kings And Pawns Mix Comparison</h1>
+        <img src="early_demise_header.gif" alt="Header Image">
+        <div class="header" style="font-family: Impact, sans-serif; height: 15px; line-height: 15px;font-size: 10px">
+            <h1>KINGS AND PAWNS MIX COMPARISON</h1>
         </div>
 		test1
         <div class="button-group">
@@ -311,5 +308,17 @@ function fastForward30() {
     });
 }
 </script>
+<!--<div style="display: flex; justify-content: center; margin-top: 20px;">
+            <button onclick="rewind30()" id="rewind30">Rewind 30s</button>
+            <button onclick="rewind10()" id="rewind10">Rewind 10s</button>
+            <button onclick="fastForward10()" id="fastForward10">Fast Forward 10s</button>
+            <button onclick="fastForward30()" id="fastForward30">Fast Forward 30s</button>
+        </div>-->
+
+        <div style="display: flex; justify-content: center; margin-top: 20px;">
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1" />
+            <span id="volumeDisplay">Volume: 1</span>
+        </div>
+    </div>
 </body>
 </html>
