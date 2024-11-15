@@ -244,13 +244,18 @@ function toggleVersion(version) {
     // Update volume based on slider position
     updateVolume();
 
-    // Highlight active button
-    document.getElementById(`version${currentVersion}Button`).classList.add('active');
-    document.getElementById(`version${currentVersion-1}Button`).classList.remove('active');
+    // Remove active class from all buttons
+    document.querySelectorAll('.button-group button').forEach(button => {
+        button.classList.remove('active');
+    });
 
-    // Keep the button text unchanged
+    // Add active class to the newly selected button
+    document.getElementById(`version${currentVersion}Button`).classList.add('active');
+
+    // Update button text
     document.getElementById(`version${currentVersion}Button`).textContent = `${getVersionText(currentVersion)}`;
 }
+
 
         function getVersionText(version) {
             switch(version) {
