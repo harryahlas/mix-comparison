@@ -126,21 +126,22 @@ button.active {
         <span id="volumeDisplay">Volume: 1</span>
     </div>
         <div class="header">
-            <h1>Compare Three Versions of Kings And Pawns</h1>
+            <h1>Kings And Pawns Mix Comparison</h1>
         </div>
+		test1
         <div class="button-group">
             <div>
-                <button onclick="toggleVersion(1)" id="version1Button">Listen to 5150 Version</button>
-                <button onclick="toggleVersion(2)" id="version2Button">Listen to Kranked Version</button>
-                <button onclick="toggleVersion(3)" id="version3Button">Listen to TGE Version</button>
-                <button onclick="toggleVersion(4)" id="version4Button">Listen to algorithmic_salvation.mp3</button>		
-                <button onclick="toggleVersion(5)" id="version5Button">Listen to everythingihateaboutyou.mp3</button>
-                <button onclick="toggleVersion(6)" id="version6Button">Listen to finalproduct.mp3</button>
+                <button onclick="toggleVersion(1)" id="version1Button"></button>
+                <button onclick="toggleVersion(2)" id="version2Button"></button>
+                <button onclick="toggleVersion(3)" id="version3Button"></button>
+                <button onclick="toggleVersion(4)" id="version4Button"></button>		
+                <button onclick="toggleVersion(5)" id="version5Button"></button>
+                <button onclick="toggleVersion(6)" id="version6Button"></button>
             </div>
-            <button onclick="playAll()">Play All</button>
-            <button onclick="stopPlayback()">Stop Playback</button>
+            <button onclick="playAll()">Play</button>
+            <button onclick="stopPlayback()">Pause</button>
         </div>
-
+test2
         <div style="display: flex; justify-content: center;">
             <audio id="audio1" src="KingsAndPawns_49a15.mp3"></audio>
             <audio id="audio2" src="KingsAndPawns_49a15krank02.mp3"></audio>
@@ -182,12 +183,12 @@ function initializeAudio() {
             ];
             
             // Initialize buttons with correct text
-            document.getElementById('version1Button').textContent = 'Listen to 5150 Version';
-            document.getElementById('version2Button').textContent = 'Listen to Kranked Version';
-            document.getElementById('version3Button').textContent = 'Listen to TGE Version';
-            document.getElementById('version4Button').textContent = 'Listen to algorithmic_salvation.mp3';
-			document.getElementById('version5Button').textContent = 'Listen to everythingihateaboutyou.mp3';
-			document.getElementById('version6Button').textContent = 'Listen to finalproduct.mp3';
+            document.getElementById('version1Button').textContent = 'Mix 1 - 5150 Version';
+            document.getElementById('version2Button').textContent = 'Mix 2 - Krank Version';
+            document.getElementById('version3Button').textContent = 'Mix 3 - TGE Version';
+            document.getElementById('version4Button').textContent = 'Zenith Passage Algo Salv';
+			document.getElementById('version5Button').textContent = 'KFK Everything I Hate';
+			document.getElementById('version6Button').textContent = 'Nevermore Final Product';
 
             // Set initial state
             audioElements.forEach(audio => {
@@ -248,23 +249,23 @@ function toggleVersion(version) {
     document.getElementById(`version${currentVersion-1}Button`).classList.remove('active');
 
     // Keep the button text unchanged
-    document.getElementById(`version${currentVersion}Button`).textContent = `Listen to ${getVersionText(currentVersion)}`;
+    document.getElementById(`version${currentVersion}Button`).textContent = `${getVersionText(currentVersion)}`;
 }
 
         function getVersionText(version) {
             switch(version) {
                 case 1:
-                    return '5150 Version';
+                    return 'Mix 1 - 5150 Version';
                 case 2:
-                    return 'Kranked Version';
+                    return 'Mix 2 - Krank Version';
                 case 3:
-                    return 'TGE Version';
+                    return 'Mix 3 - TGE Version';
                 case 4:
-                    return 'algorithmic_salvation.mp3';
+                    return 'Zenith Passage Algo Salv';
                 case 5:
-                    return 'everythingihateaboutyou.mp3';
+                    return 'KFK Everything I Hate';
                 case 6:
-                    return 'finalproduct.mp3';
+                    return 'Nevermore Final Product';
                 default:
                     return '';
             }
