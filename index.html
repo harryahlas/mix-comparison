@@ -140,6 +140,7 @@ button.active {
                 <button onclick="toggleVersion(4)" id="version4Button"></button>		
                 <button onclick="toggleVersion(5)" id="version5Button"></button>
                 <button onclick="toggleVersion(6)" id="version6Button"></button>
+                <button onclick="toggleVersion(7)" id="version7Button"></button>
             </div>
             <button onclick="playAll()">Play</button>
             <button onclick="stopPlayback()">Pause</button>
@@ -154,10 +155,11 @@ button.active {
 		<div style="display: flex; justify-content: center;">
             <audio id="audio1" src="KingsAndPawns_49a15.mp3"></audio>
             <audio id="audio2" src="KingsAndPawns_49a15krank02.mp3"></audio>
-            <audio id="audio3" src="KingsAndPawns_49a15_TGEtest07.mp3"></audio>    
-            <audio id="audio4" src="algorithmic_salvation.mp3"></audio> 
-            <audio id="audio5" src="everythingihateaboutyou.mp3"></audio> 
-            <audio id="audio6" src="finalproduct.mp3"></audio>			
+            <audio id="audio3" src="KingsAndPawns_49a15_TGEtest07d.mp3"></audio>    
+            <audio id="audio4" src="KingsAndPawns_49a15_TGEtest07f.mp3"></audio>    
+            <audio id="audio5" src="algorithmic_salvation.mp3"></audio> 
+            <audio id="audio6" src="everythingihateaboutyou.mp3"></audio> 
+            <audio id="audio7" src="finalproduct.mp3"></audio>			
         </div>
     </div>
 <div style="display: flex; justify-content: center; margin-top: 20px;">
@@ -188,16 +190,18 @@ function initializeAudio() {
                 document.getElementById('audio3'),
                 document.getElementById('audio4'),
                 document.getElementById('audio5'),				
-                document.getElementById('audio6')
+                document.getElementById('audio6'),				
+                document.getElementById('audio7')
             ];
             
             // Initialize buttons with correct text
             document.getElementById('version1Button').textContent = 'Mix 1 - 5150 Version';
             document.getElementById('version2Button').textContent = 'Mix 2 - Krank Version';
             document.getElementById('version3Button').textContent = 'Mix 3 - TGE Version';
-            document.getElementById('version4Button').textContent = 'Zenith Passage Algo Salv';
-			document.getElementById('version5Button').textContent = 'KFK Everything I Hate';
-			document.getElementById('version6Button').textContent = 'Nevermore Final Product';
+            document.getElementById('version4Button').textContent = 'Mix 4 - TGE Boosted Version';
+            document.getElementById('version5Button').textContent = 'Zenith Passage Algo Salv';
+			document.getElementById('version6Button').textContent = 'KFK Everything I Hate';
+			document.getElementById('version7Button').textContent = 'Nevermore Final Product';
 
             // Set initial state
             audioElements.forEach(audio => {
@@ -274,11 +278,13 @@ function toggleVersion(version) {
                     return 'Mix 2 - Krank Version';
                 case 3:
                     return 'Mix 3 - TGE Version';
-                case 4:
-                    return 'Zenith Passage Algo Salv';
+				case 4:
+                    return 'Mix 4 - TGE Boosted Version';
                 case 5:
-                    return 'KFK Everything I Hate';
+                    return 'Zenith Passage Algo Salv';
                 case 6:
+                    return 'KFK Everything I Hate';
+                case 7:
                     return 'Nevermore Final Product';
                 default:
                     return '';
